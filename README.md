@@ -52,3 +52,48 @@ bash <(curl -fsSL [https://raw.githubusercontent.com/Ptechgithub/WaterWall-Docs/
 ```
 ![image](https://github.com/user-attachments/assets/8284fac7-3398-47ad-9470-35648acdf785)
 
+
+# معرفی WaterWall
+
+WaterWall یک هسته (core) چندمنظوره و انعطاف‌پذیر است که به شما امکان می‌دهد روش‌های متنوعی برای ایجاد تونل (tunnel) بر اساس نیازهای خود انتخاب و اجرا کنید. هدف اصلی پروژه WaterWall عبارتند از:
+
+* **ایجاد تونل قدرتمند و مطمئن:** تمرکز اولیه بر توانایی اجرای یک تونل کارآمد و مطمئن است.
+* **پیکربندی مستقیم:** امکان ساخت پیکربندی مستقیم برای بررسی فایروال ایران، اعمال یافته‌ها و جلوگیری از فیلتر شدن. WaterWall با آخرین تغییرات فایروال ایران سازگار است.
+
+## پیکربندی هسته WaterWall
+
+برای اجرای هسته WaterWall، دو فایل JSON را در کنار فایل اجرایی قرار دهید:
+
+* `core.json`: شامل تنظیمات لاگ‌ها (logs) و تعداد ترد‌ها (threads). می‌توانید لاگ‌های مورد نظر و سطح جزئیات آنها را مشخص کنید. همچنین، تعداد ترد‌های برنامه را در این فایل تنظیم کنید (پیش‌فرض برابر با تعداد هسته‌های CPU سرور).
+* `config.json`: پیکربندی اصلی که تونل مورد نظر و پروتکل استفاده شده را مشخص می‌کند. در این فایل، پروتکل را به صورت `protocol stack` توصیف کنید. برنامه از این توصیف به عنوان دستورالعمل برای ساخت پروتکل استفاده می‌کند.
+
+## نصب WaterWall
+
+برای نصب WaterWall روی سرور، مراحل زیر را دنبال کنید:
+
+1.  **دانلود فایل WaterWall:**
+    ```bash
+    wget [https://github.com/radkesvat/WaterWall/releases/download/vx.x/Waterwall-linux-64.zip](https://github.com/radkesvat/WaterWall/releases/download/vx.x/Waterwall-linux-64.zip)
+    ```
+2.  **نصب unzip و استخراج فایل دانلود شده:**
+    ```bash
+    apt install unzip && unzip Waterwall-linux-64.zip
+    ```
+3.  **تغییر مجوزهای (permission) فایل اجرایی WaterWall:**
+    ```bash
+    chmod +rwx Waterwall
+    ```
+
+## اجرای WaterWall
+
+برای اجرای عادی WaterWall، دستور زیر را در ترمینال وارد کنید:
+```bash
+./Waterwall
+```
+
+**نکته:** برای اجرای WaterWall در پس‌زمینه و جلوگیری از بسته شدن آن پس از بستن اتصال SSH، می‌توانید از دستورات `tmux`، `nohup`، `screen` یا `service` استفاده کنید. به عنوان مثال:
+
+```bash
+nohup ./Waterwall &
+```
+اکنون آماده هستید تا طبق آموزش‌ها، تانل (tunnel) خود را پیکربندی و اجرا کنید.
